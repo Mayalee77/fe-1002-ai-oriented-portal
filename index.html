@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FE 1002 AI Oriented Portal</title>
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --panel:#ffffff;
+      --line:#d7e1ee;
+      --text:#172033;
+      --muted:#697386;
+      --accent:#1457d4;
+      --accent-soft:#dbeafe;
+      --shadow:0 18px 40px rgba(15, 23, 42, 0.09);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(20,87,212,.12), transparent 28%),
+        linear-gradient(180deg, #eef4ff 0%, #f8fbff 260px, var(--bg) 100%);
+    }
+    .wrap{
+      max-width:1600px;
+      margin:0 auto;
+      padding:32px 24px 56px;
+    }
+    .hero{
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(255,255,255,.9);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      padding:30px;
+      backdrop-filter:blur(12px);
+    }
+    h1{
+      margin:0;
+      font-size:clamp(28px, 3.7vw, 46px);
+      line-height:1.14;
+    }
+    .intro{
+      margin:14px 0 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.8;
+      max-width:1100px;
+    }
+    .status{
+      margin-top:14px;
+      min-height:20px;
+      color:var(--muted);
+      font-size:14px;
+      white-space:pre-line;
+    }
+    .tabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:22px;
+    }
+    .tab{
+      border:none;
+      border-radius:999px;
+      padding:11px 18px;
+      background:#e5edf9;
+      color:#274060;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      transition:all .2s ease;
+    }
+    .tab.active{
+      background:var(--accent);
+      color:#fff;
+      box-shadow:0 10px 24px rgba(20, 87, 212, 0.24);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(310px, 1fr));
+      gap:22px;
+      margin-top:24px;
+    }
+    .section{
+      margin-top:26px;
+    }
+    .section-title{
+      margin:0;
+      font-size:28px;
+      line-height:1.2;
+    }
+    .section-copy{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.8;
+    }
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      min-height:340px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .badge{
+      background:var(--accent-soft);
+      color:var(--accent);
+      border-radius:999px;
+      padding:7px 12px;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .state{
+      border-radius:999px;
+      padding:7px 12px;
+      font-size:12px;
+      font-weight:700;
+      background:#eef2f7;
+      color:#4b5563;
+    }
+    .state.ready{
+      background:#e7f7ee;
+      color:#166534;
+    }
+    .group-title{
+      margin:0;
+      font-size:24px;
+      line-height:1.2;
+    }
+    .group-sub{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+    }
+    .info-box{
+      margin-top:16px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#f8fafc;
+      padding:14px;
+      display:grid;
+      gap:8px;
+    }
+    .info-row{
+      font-size:14px;
+      color:#243244;
+      line-height:1.7;
+    }
+    .info-key{
+      font-weight:700;
+      color:var(--accent);
+      margin-right:8px;
+    }
+    .info-value{
+      color:var(--muted);
+    }
+    .work-list{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+      flex:1;
+    }
+    .work-item{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#f8fafc;
+      padding:14px;
+    }
+    .work-kind{
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--accent);
+    }
+    .work-name{
+      margin-top:8px;
+      font-size:14px;
+      line-height:1.7;
+      color:#243244;
+      word-break:break-word;
+    }
+    .empty{
+      margin-top:8px;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--muted);
+    }
+    .actions{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    .actions a,
+    .actions button{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      background:#fff;
+      color:var(--text);
+      text-align:center;
+      font-size:14px;
+      transition:all .2s ease;
+      cursor:pointer;
+    }
+    .actions a{
+      text-decoration:none;
+    }
+    .actions a:hover,
+    .actions button:hover{
+      border-color:var(--accent);
+      color:var(--accent);
+      transform:translateY(-1px);
+    }
+    .actions a.disabled,
+    .actions button.disabled{
+      pointer-events:none;
+      opacity:.45;
+    }
+    .footer{
+      margin-top:22px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.8;
+    }
+    .code{
+      font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background:#0f172a;
+      color:#e2e8f0;
+      padding:2px 6px;
+      border-radius:7px;
+      font-size:12px;
+    }
+    [hidden]{display:none !important}
+    @media (max-width:720px){
+      .wrap{padding:18px 14px 40px}
+      .hero{padding:22px}
+      .actions{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>The Future Prospects of Chinese and World Civilization (AI Oriented) (1002) (Dr. Maya Siqing LI) [Semester 2 of 2025-2026]</h1>
+      <p class="intro">
+        This portal contains 10 group slots. The content from the available source folders has been imported into this package for the first 8 groups where files were found.
+        Each group shows separate entry points for the <strong>culture</strong> and <strong>tech</strong> works.
+      </p>
+      <div class="tabs" role="tablist" aria-label="Work Sections">
+        <button class="tab active" type="button" data-target="group-panel">Group Work</button>
+        <button class="tab" type="button" data-target="individual-panel">Individual Work</button>
+      </div>
+      <p class="status" id="status">Loading group files...</p>
+    </section>
+
+    <section class="section" id="group-panel">
+      <h2 class="section-title">Group Work</h2>
+      <p class="section-copy">The 10 group slots stay fixed. Existing group files are inserted, and empty groups keep their positions.</p>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section class="section" id="individual-panel" hidden>
+      <h2 class="section-title">Individual Work</h2>
+      <p class="section-copy">Each student keeps an individual slot. The layout stays consistent with the current download-only format.</p>
+      <div class="grid" id="individual-grid"></div>
+    </section>
+
+    <p class="footer">
+      Package structure: <span class="code">index.html</span> + <span class="code">works/group1</span> ... <span class="code">works/group10</span>.
+      Missing groups currently stay as placeholders so you can continue dropping files in later without changing the page.
+    </p>
+  </div>
+
+  <script>
+    const GROUPS = [
+      {
+        number: 1,
+        culture: "works/group1/(AI ORIENTED) Group1_culture.pptx",
+        tech: "works/group1/(AI ORIENTED) Group1_tech.pptx"
+      },
+      {
+        number: 2,
+        culture: "works/group2/(AI ORIENTED) Group2_culture.pptx",
+        tech: "works/group2/(AI ORIENTED) Group2_tech.pptx"
+      },
+      {
+        number: 3,
+        culture: "works/group3/(AI ORIENTED) Group3_culture.pptx",
+        tech: "works/group3/(AI ORIENTED) Group3_tech.pptx"
+      },
+      {
+        number: 4,
+        culture: "",
+        tech: ""
+      },
+      {
+        number: 5,
+        culture: "works/group5/(AI ORIENTED) Group5_culture.pptx",
+        tech: "works/group5/(AI ORIENTED) Group5_tech.pptx"
+      },
+      {
+        number: 6,
+        culture: "works/group6/(AI ORIENTED) Group6_culture.pptx",
+        tech: "works/group6/(AI ORIENTED) Group6_tech.pptx"
+      },
+      {
+        number: 7,
+        culture: "",
+        tech: ""
+      },
+      {
+        number: 8,
+        culture: "works/group8/(AI ORIENTED) Group8_culture.pdf",
+        tech: "works/group8/(AI ORIENTED) Group8_tech.pptx"
+      },
+      {
+        number: 9,
+        culture: "",
+        tech: ""
+      },
+      {
+        number: 10,
+        culture: "",
+        tech: ""
+      }
+    ];
+
+    const STUDENTS = [
+      { index: 1, chinese: "徐伯闻", english: "Smell", group: "Group 1" },
+      { index: 2, chinese: "李炜桐", english: "ASA", group: "Group 1" },
+      { index: 3, chinese: "黄圳銓", english: "", group: "Group 1" },
+      { index: 4, chinese: "王嫣然", english: "Rianna", group: "Group 1" },
+      { index: 5, chinese: "易欣悦", english: "Jade", group: "Group 1" },
+      { index: 6, chinese: "王俊博", english: "Stephen", group: "Group 2" },
+      { index: 7, chinese: "邓浩明", english: "Deng Haoming", group: "Group 2" },
+      { index: 8, chinese: "夏晨骞", english: "Zane", group: "Group 2" },
+      { index: 9, chinese: "黄麒润", english: "Karen", group: "Group 2" },
+      { index: 10, chinese: "胡峻铭", english: "Jimmy Hu", group: "Group 2" },
+      { index: 11, chinese: "林可", english: "", group: "Group 3" },
+      { index: 12, chinese: "刘畅", english: "Grace", group: "Group 3" },
+      { index: 13, chinese: "崔了凡", english: "Chloe", group: "Group 3" },
+      { index: 14, chinese: "王若祎", english: "Abby", group: "Group 3" },
+      { index: 15, chinese: "肖阳", english: "", group: "Group 4" },
+      { index: 16, chinese: "张一诺", english: "Helen", group: "Group 4" },
+      { index: 17, chinese: "李政谕", english: "Bella", group: "Group 4" },
+      { index: 18, chinese: "叶子箐", english: "", group: "Group 4" },
+      { index: 19, chinese: "刘雨萌", english: "Icey", group: "Group 4" },
+      { index: 20, chinese: "张栩豪", english: "Kevin", group: "Group 5" },
+      { index: 21, chinese: "王彦奇", english: "Felix", group: "Group 5" },
+      { index: 22, chinese: "林禹同", english: "Gosling", group: "Group 5" },
+      { index: 23, chinese: "谢尚哲", english: "Steve", group: "Group 5" },
+      { index: 24, chinese: "熊大略", english: "David Xiong", group: "Group 5" },
+      { index: 25, chinese: "廖政恺", english: "William", group: "Group 6" },
+      { index: 26, chinese: "王子敬", english: "Michael", group: "Group 6" },
+      { index: 27, chinese: "徐子夏", english: "", group: "Group 6" },
+      { index: 28, chinese: "贾轶涵", english: "Timoris", group: "Group 6" },
+      { index: 29, chinese: "王诗怡", english: "", group: "Group 7" },
+      { index: 30, chinese: "邓杰潆", english: "Astoria", group: "Group 7" },
+      { index: 31, chinese: "陆思辰", english: "Stella", group: "Group 7" },
+      { index: 32, chinese: "毕德宁", english: "Selena", group: "Group 7" },
+      { index: 33, chinese: "刘咏昭", english: "", group: "Group 8" },
+      { index: 34, chinese: "阳晟璐", english: "", group: "Group 8" },
+      { index: 35, chinese: "门心仪", english: "Isla", group: "Group 8" },
+      { index: 36, chinese: "季玥彤", english: "", group: "Group 8" },
+      { index: 37, chinese: "刘博文", english: "Eric", group: "Group 9" },
+      { index: 38, chinese: "王科凯", english: "Jason", group: "Group 9" },
+      { index: 39, chinese: "关宇真", english: "Alex Guan", group: "Group 9" },
+      { index: 40, chinese: "乔嘉禾", english: "Harry", group: "Group 9" },
+      { index: 41, chinese: "朱浩洋", english: "Geoffrey", group: "Group 10" },
+      { index: 42, chinese: "胡雅琳", english: "", group: "Group 10" },
+      { index: 43, chinese: "杨佳琳", english: "Cassie", group: "Group 10" },
+      { index: 44, chinese: "薛羽桐", english: "Sicily", group: "Group 10" }
+    ].map((student) => {
+      const code = String(student.index).padStart(2, "0");
+      return {
+        ...student,
+        label: code,
+        title: student.chinese,
+        subtitle: student.english || "English name not provided",
+        file: `individual/${code}-${student.chinese}.pptx`
+      };
+    });
+
+    const grid = document.getElementById("grid");
+    const individualGrid = document.getElementById("individual-grid");
+    const statusEl = document.getElementById("status");
+
+    function setStatus(text) {
+      statusEl.textContent = text;
+    }
+
+    function initTabs() {
+      const tabs = document.querySelectorAll(".tab");
+      const panels = [
+        document.getElementById("group-panel"),
+        document.getElementById("individual-panel")
+      ];
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = tab.dataset.target;
+          tabs.forEach((button) => {
+            button.classList.toggle("active", button === tab);
+          });
+          panels.forEach((panel) => {
+            panel.hidden = panel.id !== target;
+          });
+        });
+      });
+    }
+
+    function formatName(path) {
+      return path.split("/").pop();
+    }
+
+    function buildDownloadHref(path) {
+      return encodeURI(path);
+    }
+
+    function makeActionMarkup(path) {
+      if (!path) {
+        return `
+          <div class="actions">
+            <a class="disabled" href="#">Download</a>
+          </div>
+        `;
+      }
+
+      const fileName = formatName(path);
+      const href = buildDownloadHref(path);
+
+      return `
+        <div class="actions">
+          <button type="button" class="download-btn" data-file-path="${href}" data-file-name="${fileName}">Download</button>
+        </div>
+      `;
+    }
+
+    function makeWorkItem(kind, path) {
+      if (!path) {
+        return `
+          <div class="work-item">
+            <div class="work-kind">${kind}</div>
+            <div class="empty">Not uploaded yet.</div>
+            ${makeActionMarkup("")}
+          </div>
+        `;
+      }
+
+      return `
+        <div class="work-item">
+          <div class="work-kind">${kind}</div>
+          <div class="work-name">${formatName(path)}</div>
+          ${makeActionMarkup(path)}
+        </div>
+      `;
+    }
+
+    function makeIndividualCard(student) {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-head">
+          <span class="badge">Student ${student.label}</span>
+          <span class="state">${student.group}</span>
+        </div>
+        <h2 class="group-title">${student.title}</h2>
+        <p class="group-sub">${student.subtitle}</p>
+        <div class="info-box">
+          <div class="info-row"><span class="info-key">AI Tool:</span><span class="info-value">________________</span></div>
+          <div class="info-row"><span class="info-key">Theme:</span><span class="info-value">________________</span></div>
+          <div class="info-row"><span class="info-key">Title:</span><span class="info-value">________________</span></div>
+        </div>
+        <div class="work-list">
+          <div class="work-item">
+            <div class="work-kind">Individual Work</div>
+            <div class="work-name">${student.file}</div>
+            <div class="actions">
+              <a class="disabled" href="#">Download</a>
+            </div>
+          </div>
+        </div>
+      `;
+      return card;
+    }
+
+    function makeCard(group) {
+      const readyCount = [group.culture, group.tech].filter(Boolean).length;
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-head">
+          <span class="badge">Group ${group.number}</span>
+          <span class="state ${readyCount ? "ready" : ""}">${readyCount ? `${readyCount}/2 Ready` : "Pending"}</span>
+        </div>
+        <h2 class="group-title">Group ${group.number}</h2>
+        <p class="group-sub">Culture work and tech work are listed separately below.</p>
+        <div class="info-box">
+          <div class="info-row"><span class="info-key">AI Tool:</span><span class="info-value">________________</span></div>
+          <div class="info-row"><span class="info-key">Theme:</span><span class="info-value">________________</span></div>
+          <div class="info-row"><span class="info-key">Title:</span><span class="info-value">________________</span></div>
+        </div>
+        <div class="work-list">
+          ${makeWorkItem("Culture", group.culture)}
+          ${makeWorkItem("Tech", group.tech)}
+        </div>
+      `;
+      return { card, readyCount };
+    }
+
+    async function triggerDownload(filePath, fileName) {
+      const response = await fetch(filePath);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const tempLink = document.createElement("a");
+      tempLink.href = blobUrl;
+      tempLink.download = fileName;
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      tempLink.remove();
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+    }
+
+    function initDownloadButtons() {
+      document.addEventListener("click", async (event) => {
+        const button = event.target.closest(".download-btn");
+        if (!button) {
+          return;
+        }
+
+        const filePath = button.dataset.filePath;
+        const fileName = button.dataset.fileName;
+        if (!filePath || !fileName) {
+          return;
+        }
+
+        const originalText = button.textContent;
+        button.disabled = true;
+        button.textContent = "Downloading...";
+
+        try {
+          await triggerDownload(filePath, fileName);
+          setStatus(`Downloaded: ${fileName}`);
+        } catch (error) {
+          console.error(error);
+          const isLocalFile = window.location.protocol === "file:";
+          if (isLocalFile) {
+            const message =
+              `Local preview cannot force-download this file.\n` +
+              `Please test this page through GitHub Pages or a local web server.\n` +
+              `File: ${fileName}`;
+            setStatus(message);
+            window.alert(message);
+          } else {
+            const message = `Download failed: ${fileName}`;
+            setStatus(message);
+            window.alert(message);
+          }
+        } finally {
+          button.disabled = false;
+          button.textContent = originalText;
+        }
+      });
+    }
+
+    function init() {
+      initTabs();
+      initDownloadButtons();
+
+      let readyGroups = 0;
+      let readyFiles = 0;
+
+      GROUPS.forEach((group) => {
+        const { card, readyCount } = makeCard(group);
+        grid.appendChild(card);
+        if (readyCount > 0) {
+          readyGroups += 1;
+          readyFiles += readyCount;
+        }
+      });
+
+      STUDENTS.forEach((student) => {
+        individualGrid.appendChild(makeIndividualCard(student));
+      });
+
+      setStatus(`Loaded ${readyFiles} files across ${readyGroups} groups. Total group slots: 10. Individual slots: ${STUDENTS.length}.`);
+    }
+
+    init();
+  </script>
+</body>
+</html>
