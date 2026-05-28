@@ -149,6 +149,27 @@
       font-size:14px;
       line-height:1.7;
     }
+    .summary{
+      margin-top:16px;
+      padding:16px 18px;
+      border-radius:18px;
+      background:linear-gradient(180deg, #fbfdff 0%, #f4f8ff 100%);
+      border:1px solid #dbe7f7;
+    }
+    .summary-title{
+      margin:0 0 8px;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--accent);
+    }
+    .summary-copy{
+      margin:0;
+      color:#425066;
+      font-size:14px;
+      line-height:1.8;
+    }
     .info-box{
       margin-top:16px;
       border:1px solid var(--line);
@@ -294,51 +315,91 @@
     const GROUPS = [
       {
         number: 1,
+        title: "Civilization as a Shared Future in the Age of AI",
+        theme: "Public-minded civilization, ethical dialogue, and shared futures",
+        aiTool: "AI-assisted research and presentation workflow",
+        summary: "This draft introduces Group 1 as an opening reflection on how Chinese civilization can speak to an AI-driven world through inclusiveness, ethical responsibility, and shared human destiny. It frames civilization not as a closed tradition, but as a living resource for dialogue across cultures, technologies, and futures. By connecting classical values with present questions of governance, communication, and digital life, the presentation positions Chinese wisdom as a bridge between heritage and innovation.",
         culture: "works/group1/(AI ORIENTED) Group1_culture.pptx",
         tech: "works/group1/(AI ORIENTED) Group1_tech.pptx"
       },
       {
         number: 2,
+        title: "The Core Spirits of Chinese Civilization: Interpreting Tianxia Weigong",
+        theme: "The world as a common good, fairness, inclusiveness, and public responsibility",
+        aiTool: "Not specified",
+        summary: "This presentation explains the spirit of Tianxia Weigong through Confucian thought and The Book of Rites, showing how people-centered governance links fairness, inclusiveness, and public duty. It compares this idea with traditions such as Ubuntu, traces its development from classical philosophy to Sun Yat-sen's democratic vision, and connects it to people's democracy, common prosperity, and global governance today. The project argues that this civilizational ideal still offers Eastern wisdom for building a shared future for humanity.",
         culture: "works/group2/(AI ORIENTED) Group2_culture.pptx",
         tech: "works/group2/(AI ORIENTED) Group2_tech.pptx"
       },
       {
         number: 3,
+        title: "People as the Foundation: Bringing Ancient Chinese Political Wisdom into the Age of AI",
+        theme: "People-centered governance from oracle bones to algorithms",
+        aiTool: "HeyGen",
+        summary: "This project asks whether the 3,000-year-old principle of 'people as the foundation of the state' can still reshape governance today. It traces the idea from the Zhou Mandate of Heaven and Mencius to Taoist non-interference and the imperial examination system, then compares it with Greek citizen-power and Indian priestly models. Using HeyGen, the team stages a dialogue among Confucius, Tang Taizong, and Marcus Aurelius, and connects ancient political wisdom to poverty alleviation, whole-process democracy, the Fengqiao model, and SDGs 1, 2, 13, and 16.",
         culture: "works/group3/(AI ORIENTED) Group3_culture.pptx",
         tech: "works/group3/(AI ORIENTED) Group3_tech.pptx"
       },
       {
         number: 4,
+        title: "Technological Civilization and Jingshi Zhiyong",
+        theme: "Practical statecraft in the technological era",
+        aiTool: "n8n workflow",
+        summary: "This work connects Jingshi Zhiyong with technological civilization by arguing that technology should serve governance, public welfare, and social development rather than innovation alone. Through historical examples, cross-civilizational comparison, contemporary cases, and SDG 9, the team shows that traditional practical statecraft still carries real value today. Their conclusion is that digital tools become most meaningful when technological progress is transformed into responsible, concrete solutions for real-world problems.",
         culture: "",
         tech: ""
       },
       {
         number: 5,
+        title: "Unity of Man and Nature: Bringing Laozi Back in the Age of AI",
+        theme: "Tian Ren He Yi, ecological ethics, and digital balance",
+        aiTool: "Vibe Coding (Codex)",
+        summary: "This presentation brings Tian Ren He Yi into the AI era by linking Confucian benevolence, Taoist return to the source, and Buddhist equality of beings with current environmental and psychological crises. It compares Chinese thought with Western dualism and Indian ahimsa, while grounding the discussion in cases such as the 24 Solar Terms, Qin environmental law, and China's Dual Carbon Goals. The team also builds a RAG-based Laozi agent that responds to modern stress, materialism, and eco-anxiety in a calm Daoist voice, asking how technology can return to nature rather than overpower it.",
         culture: "works/group5/(AI ORIENTED) Group5_culture.pptx",
         tech: "works/group5/(AI ORIENTED) Group5_tech.pptx"
       },
       {
         number: 6,
+        title: "RÉN: The Heart of Chinese Civilization",
+        theme: "Benevolence as a relational ethic from self to all living things",
+        aiTool: "Dify chatbot",
+        summary: "This group explores Rén as the Confucian virtue of benevolence, following its philosophical roots, East Asian transmission, and cross-cultural parallels with Christian agape and Buddhist karuna. It moves from everyday examples, such as caring for stray cats, to questions of global governance, showing how Rén radiates outward from the self to wider communities and all living beings. The project argues that Rén remains a practical moral foundation for contemporary life, and extends that idea through a Dify chatbot that lets users learn the concept interactively.",
         culture: "works/group6/(AI ORIENTED) Group6_culture.pptx",
         tech: "works/group6/(AI ORIENTED) Group6_tech.pptx"
       },
       {
         number: 7,
+        title: "The Middle Way: Traditional Chinese Humanistic Thought",
+        theme: "Moderation (Zhongyong) as adaptive wisdom with modern global value",
+        aiTool: "LivePortrait",
+        summary: "This project presents Zhongyong not as a rigid midpoint, but as adaptive and practical wisdom that still matters in a crisis-filled world. It traces the idea from early classics to later thought, contrasts it with Western zero-sum habits through the examples of Zheng He and Xuanzang, and proposes the '45-Degree Life' as a response to burnout, involution, and lying flat. By aligning the Middle Way with the 17 UN SDGs and staging a LivePortrait dialogue between Aristotle and Confucius, the team argues that moderation remains a viable Chinese solution to economic, ecological, and governance challenges.",
         culture: "",
         tech: ""
       },
       {
         number: 8,
+        title: "The Symphony of Civilizations: From Ceaseless Vitality and Harmony in Diversity to Western Process Philosophy",
+        theme: "Ceaseless vitality, harmony in diversity, and process thinking",
+        aiTool: "Not specified",
+        summary: "Centered on traditional Chinese philosophy, this presentation examines the twin spirits of ceaseless vitality and harmony in diversity through The I Ching, Confucianism, and Taoism. It applies these ideas to politics, ethics, and aesthetics, then places them in dialogue with Alfred North Whitehead's process philosophy. By highlighting the shared emphasis on process before substance and the primacy of relationships, the project reveals a deeper resonance between Chinese civilizational thought and modern Western philosophy.",
         culture: "works/group8/(AI ORIENTED) Group8_culture.pdf",
         tech: "works/group8/(AI ORIENTED) Group8_tech.pptx"
       },
       {
         number: 9,
+        title: "Jingshi Zhiyong: Practical Wisdom in Chinese Civilization and Gary-Agent-RAG",
+        theme: "Knowledge applied for the common good",
+        aiTool: "Gary-Agent-RAG",
+        summary: "This project asks whether ancient Chinese philosophy already anticipated how technology should serve humanity through the idea of Jingshi Zhiyong. To make that tradition usable today, the group built a Gary-Agent-RAG system that transforms five classical Chinese texts into an interactive, source-grounded learning tool. Their work argues that the true value of technology lies not only in capability, but also in responsibility, and that ancient knowledge and modern AI can converge around a shared public purpose.",
         culture: "",
         tech: ""
       },
       {
         number: 10,
+        title: "Li & Yue: Guiding Tech Civilization with Chinese Wisdom",
+        theme: "Ritual order, inner harmony, and ethical technological life",
+        aiTool: "Coze",
+        summary: "This group explores whether the ancient ethos of Li and Yue can still guide order and harmony in a rapidly developing technological world. It explains Li as the framework of social norms and Yue as the pursuit of inner and collective harmony, then compares Confucius' humanistic wisdom with Einstein's scientific rationality to show how Chinese values complement Western technological civilization. Using Coze to create thematic videos, the project links Li and Yue to AI ethics, green technology, digital etiquette, and modern governance, presenting tradition and innovation as mutually illuminating.",
         culture: "",
         tech: ""
       }
@@ -472,7 +533,7 @@
       return `
         <div class="actions">
           <a href="${viewHref}" target="_blank" rel="noreferrer">View</a>
-          <button type="button" class="download-btn" data-file-path="${href}" data-file-name="${fileName}">Download</button>
+          <a href="${href}" download="${fileName}" target="_blank" rel="noreferrer">Download</a>
         </div>
       `;
     }
@@ -512,6 +573,10 @@
           <div class="info-row"><span class="info-key">Theme:</span><span class="info-value">________________</span></div>
           <div class="info-row"><span class="info-key">Title:</span><span class="info-value">________________</span></div>
         </div>
+        <div class="summary">
+          <div class="summary-title">Project Overview</div>
+          <p class="summary-copy">Individual project description can be added here later.</p>
+        </div>
         <div class="work-list">
           <div class="work-item">
             <div class="work-kind">Individual Work</div>
@@ -536,11 +601,15 @@
           <span class="state ${readyCount ? "ready" : ""}">${readyCount ? `${readyCount}/2 Ready` : "Pending"}</span>
         </div>
         <h2 class="group-title">Group ${group.number}</h2>
-        <p class="group-sub">Culture work and tech work are listed separately below.</p>
+        <p class="group-sub">${group.title}</p>
         <div class="info-box">
-          <div class="info-row"><span class="info-key">AI Tool:</span><span class="info-value">________________</span></div>
-          <div class="info-row"><span class="info-key">Theme:</span><span class="info-value">________________</span></div>
-          <div class="info-row"><span class="info-key">Title:</span><span class="info-value">________________</span></div>
+          <div class="info-row"><span class="info-key">AI Tool:</span><span class="info-value">${group.aiTool}</span></div>
+          <div class="info-row"><span class="info-key">Theme:</span><span class="info-value">${group.theme}</span></div>
+          <div class="info-row"><span class="info-key">Title:</span><span class="info-value">${group.title}</span></div>
+        </div>
+        <div class="summary">
+          <div class="summary-title">Project Overview</div>
+          <p class="summary-copy">${group.summary}</p>
         </div>
         <div class="work-list">
           ${makeWorkItem("Culture", group.culture)}
@@ -550,68 +619,29 @@
       return { card, readyCount };
     }
 
-    async function triggerDownload(filePath, fileName) {
-      const response = await fetch(filePath);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const blob = await response.blob();
-      const blobUrl = URL.createObjectURL(blob);
-      const tempLink = document.createElement("a");
-      tempLink.href = blobUrl;
-      tempLink.download = fileName;
-      document.body.appendChild(tempLink);
-      tempLink.click();
-      tempLink.remove();
-      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-    }
-
-    function initDownloadButtons() {
-      document.addEventListener("click", async (event) => {
-        const button = event.target.closest(".download-btn");
-        if (!button) {
+    function initDownloadLinks() {
+      document.addEventListener("click", (event) => {
+        const link = event.target.closest("a[download]");
+        if (!link) {
           return;
         }
 
-        const filePath = button.dataset.filePath;
-        const fileName = button.dataset.fileName;
-        if (!filePath || !fileName) {
-          return;
-        }
+        const fileName = link.getAttribute("download") || "file";
+        setStatus(`Starting download: ${fileName}`);
 
-        const originalText = button.textContent;
-        button.disabled = true;
-        button.textContent = "Downloading...";
-
-        try {
-          await triggerDownload(filePath, fileName);
-          setStatus(`Downloaded: ${fileName}`);
-        } catch (error) {
-          console.error(error);
-          const isLocalFile = window.location.protocol === "file:";
-          if (isLocalFile) {
-            const message =
-              `Local preview cannot force-download this file.\n` +
-              `Please test this page through GitHub Pages or a local web server.\n` +
-              `File: ${fileName}`;
-            setStatus(message);
-            window.alert(message);
-          } else {
-            const message = `Download failed: ${fileName}`;
-            setStatus(message);
-            window.alert(message);
-          }
-        } finally {
-          button.disabled = false;
-          button.textContent = originalText;
+        if (window.location.protocol === "file:") {
+          const message =
+            `Local preview may not force-download this file.\n` +
+            `Please test this page through GitHub Pages or a local web server.\n` +
+            `File: ${fileName}`;
+          setStatus(message);
         }
       });
     }
 
     function init() {
       initTabs();
-      initDownloadButtons();
+      initDownloadLinks();
 
       let readyGroups = 0;
       let readyFiles = 0;
