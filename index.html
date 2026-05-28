@@ -316,9 +316,9 @@
       {
         number: 1,
         title: "Civilization as a Shared Future in the Age of AI",
-        theme: "Public-minded civilization, ethical dialogue, and shared futures",
-        aiTool: "AI-assisted research and presentation workflow",
-        summary: "This draft introduces Group 1 as an opening reflection on how Chinese civilization can speak to an AI-driven world through inclusiveness, ethical responsibility, and shared human destiny. It frames civilization not as a closed tradition, but as a living resource for dialogue across cultures, technologies, and futures. By connecting classical values with present questions of governance, communication, and digital life, the presentation positions Chinese wisdom as a bridge between heritage and innovation.",
+        theme: "Yin-Yang Wisdom",
+        aiTool: "OpenClaw, Telegram, DeepSeek API, and RAG",
+        summary: "These two presentations explore AI-oriented innovation from both technological and cultural perspectives. The first project introduces a multifunctional medical agent built with OpenClaw, Telegram, DeepSeek API, and RAG technology. It can support Chinese medicine consultation, Western medicine consultation, medical guidance, real-time health news collection, and weather-based health suggestions. The project shows how AI agents can connect large language models with local tools, external knowledge bases, and real-time information to provide more practical and personalized services. The second presentation focuses on the Chinese civilizational idea of Tianxia Weigong, meaning 'The World as a Common Good.' It explains the concept through Confucian thought, people-centered governance, fairness, inclusiveness, public responsibility, and global cooperation. By comparing it with ideas such as Ubuntu, Islamic Waqf, and the Bill of Rights, the presentation shows how different civilizations understand public good and social responsibility. Together, the two topics connect modern AI applications with ethical values, showing that technology should not only be useful, but also responsible, inclusive, and beneficial to society.",
         culture: "works/group1/(AI ORIENTED) Group1_culture.pptx",
         tech: "works/group1/(AI ORIENTED) Group1_tech.pptx"
       },
@@ -326,7 +326,7 @@
         number: 2,
         title: "The Core Spirits of Chinese Civilization: Interpreting Tianxia Weigong",
         theme: "The world as a common good, fairness, inclusiveness, and public responsibility",
-        aiTool: "Not specified",
+        aiTool: "Not explicitly named in the PPT",
         summary: "This presentation explains the spirit of Tianxia Weigong through Confucian thought and The Book of Rites, showing how people-centered governance links fairness, inclusiveness, and public duty. It compares this idea with traditions such as Ubuntu, traces its development from classical philosophy to Sun Yat-sen's democratic vision, and connects it to people's democracy, common prosperity, and global governance today. The project argues that this civilizational ideal still offers Eastern wisdom for building a shared future for humanity.",
         culture: "works/group2/(AI ORIENTED) Group2_culture.pptx",
         tech: "works/group2/(AI ORIENTED) Group2_tech.pptx"
@@ -353,7 +353,7 @@
         number: 5,
         title: "Unity of Man and Nature: Bringing Laozi Back in the Age of AI",
         theme: "Tian Ren He Yi, ecological ethics, and digital balance",
-        aiTool: "Vibe Coding (Codex)",
+        aiTool: "Codex and RAG",
         summary: "This presentation brings Tian Ren He Yi into the AI era by linking Confucian benevolence, Taoist return to the source, and Buddhist equality of beings with current environmental and psychological crises. It compares Chinese thought with Western dualism and Indian ahimsa, while grounding the discussion in cases such as the 24 Solar Terms, Qin environmental law, and China's Dual Carbon Goals. The team also builds a RAG-based Laozi agent that responds to modern stress, materialism, and eco-anxiety in a calm Daoist voice, asking how technology can return to nature rather than overpower it.",
         culture: "works/group5/(AI ORIENTED) Group5_culture.pptx",
         tech: "works/group5/(AI ORIENTED) Group5_tech.pptx"
@@ -380,7 +380,7 @@
         number: 8,
         title: "The Symphony of Civilizations: From Ceaseless Vitality and Harmony in Diversity to Western Process Philosophy",
         theme: "Ceaseless vitality, harmony in diversity, and process thinking",
-        aiTool: "Not specified",
+        aiTool: "AI video generation workflow (specific tool not named in the PPT)",
         summary: "Centered on traditional Chinese philosophy, this presentation examines the twin spirits of ceaseless vitality and harmony in diversity through The I Ching, Confucianism, and Taoism. It applies these ideas to politics, ethics, and aesthetics, then places them in dialogue with Alfred North Whitehead's process philosophy. By highlighting the shared emphasis on process before substance and the primacy of relationships, the project reveals a deeper resonance between Chinese civilizational thought and modern Western philosophy.",
         culture: "works/group8/(AI ORIENTED) Group8_culture.pdf",
         tech: "works/group8/(AI ORIENTED) Group8_tech.pptx"
@@ -602,14 +602,14 @@
         </div>
         <h2 class="group-title">Group ${group.number}</h2>
         <p class="group-sub">${group.title}</p>
+        <div class="summary">
+          <div class="summary-title">Project Overview</div>
+          <p class="summary-copy">${group.summary}</p>
+        </div>
         <div class="info-box">
           <div class="info-row"><span class="info-key">AI Tool:</span><span class="info-value">${group.aiTool}</span></div>
           <div class="info-row"><span class="info-key">Theme:</span><span class="info-value">${group.theme}</span></div>
           <div class="info-row"><span class="info-key">Title:</span><span class="info-value">${group.title}</span></div>
-        </div>
-        <div class="summary">
-          <div class="summary-title">Project Overview</div>
-          <p class="summary-copy">${group.summary}</p>
         </div>
         <div class="work-list">
           ${makeWorkItem("Culture", group.culture)}
