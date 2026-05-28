@@ -280,7 +280,7 @@
 
     <section class="section" id="individual-panel" hidden>
       <h2 class="section-title">Individual Work</h2>
-      <p class="section-copy">Each student keeps an individual slot. The layout stays consistent with the current download-only format.</p>
+      <p class="section-copy">Each student keeps an individual slot. When an individual file is added later, the card will support both online viewing and downloading.</p>
       <div class="grid" id="individual-grid"></div>
     </section>
 
@@ -436,10 +436,30 @@
       return encodeURI(path);
     }
 
+    function getFileExtension(path) {
+      return path.split(".").pop().toLowerCase();
+    }
+
+    function buildViewHref(path) {
+      const fileUrl = new URL(buildDownloadHref(path), window.location.href).href;
+      const extension = getFileExtension(path);
+
+      if (extension === "pdf") {
+        return fileUrl;
+      }
+
+      if (extension === "pptx") {
+        return `https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(fileUrl)}`;
+      }
+
+      return fileUrl;
+    }
+
     function makeActionMarkup(path) {
       if (!path) {
         return `
           <div class="actions">
+            <a class="disabled" href="#">View</a>
             <a class="disabled" href="#">Download</a>
           </div>
         `;
@@ -447,9 +467,11 @@
 
       const fileName = formatName(path);
       const href = buildDownloadHref(path);
+      const viewHref = buildViewHref(path);
 
       return `
         <div class="actions">
+          <a href="${viewHref}" target="_blank" rel="noreferrer">View</a>
           <button type="button" class="download-btn" data-file-path="${href}" data-file-name="${fileName}">Download</button>
         </div>
       `;
@@ -495,6 +517,7 @@
             <div class="work-kind">Individual Work</div>
             <div class="work-name">${student.file}</div>
             <div class="actions">
+              <a class="disabled" href="#">View</a>
               <a class="disabled" href="#">Download</a>
             </div>
           </div>
