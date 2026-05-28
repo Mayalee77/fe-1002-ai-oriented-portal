@@ -50,6 +50,17 @@
       line-height:1.8;
       max-width:1100px;
     }
+    .teacher{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+    }
+    .teacher a{
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:700;
+    }
     .status{
       margin-top:14px;
       min-height:20px;
@@ -282,6 +293,7 @@
   <div class="wrap">
     <section class="hero">
       <h1>The Future Prospects of Chinese and World Civilization (AI Oriented) (1002) (Dr. Maya Siqing LI) [Semester 2 of 2025-2026]</h1>
+      <p class="teacher">Instructor: <strong>Maya Siqing LI</strong> · <a href="https://www.bnbu.edu.cn/faculty.htm#/mayasqli/cn" target="_blank" rel="noreferrer">Faculty Profile</a></p>
       <p class="intro">
         This portal contains 10 group slots. The content from the available source folders has been imported into this package for the first 8 groups where files were found.
         Each group shows separate entry points for the <strong>culture</strong> and <strong>tech</strong> works.
@@ -571,7 +583,6 @@
         <div class="info-box">
           <div class="info-row"><span class="info-key">AI Tool:</span><span class="info-value">________________</span></div>
           <div class="info-row"><span class="info-key">Theme:</span><span class="info-value">________________</span></div>
-          <div class="info-row"><span class="info-key">Title:</span><span class="info-value">________________</span></div>
         </div>
         <div class="summary">
           <div class="summary-title">Project Overview</div>
@@ -609,7 +620,6 @@
         <div class="info-box">
           <div class="info-row"><span class="info-key">AI Tool:</span><span class="info-value">${group.aiTool}</span></div>
           <div class="info-row"><span class="info-key">Theme:</span><span class="info-value">${group.theme}</span></div>
-          <div class="info-row"><span class="info-key">Title:</span><span class="info-value">${group.title}</span></div>
         </div>
         <div class="work-list">
           ${makeWorkItem("Culture", group.culture)}
