@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHI1293 FE 1002 人工智能导向作品门户</title>
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --panel:#ffffff;
+      --line:#d7e1ee;
+      --text:#172033;
+      --muted:#697386;
+      --accent:#1457d4;
+      --accent-soft:#dbeafe;
+      --shadow:0 18px 40px rgba(15, 23, 42, 0.09);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(20,87,212,.12), transparent 28%),
+        linear-gradient(180deg, #eef4ff 0%, #f8fbff 260px, var(--bg) 100%);
+    }
+    .wrap{
+      max-width:1600px;
+      margin:0 auto;
+      padding:32px 24px 56px;
+    }
+    .hero{
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(255,255,255,.9);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      padding:30px;
+      backdrop-filter:blur(12px);
+    }
+    h1{
+      margin:0;
+      font-size:clamp(28px, 3.7vw, 46px);
+      line-height:1.14;
+    }
+    .intro{
+      margin:14px 0 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.8;
+      max-width:1100px;
+    }
+    .teacher{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+    }
+    .teacher strong{
+      font-size:20px;
+      color:var(--text);
+      letter-spacing:.01em;
+    }
+    .teacher a{
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:700;
+      text-transform:lowercase;
+    }
+    .status{
+      margin-top:14px;
+      min-height:20px;
+      color:var(--muted);
+      font-size:14px;
+      white-space:pre-line;
+    }
+    .tabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:22px;
+    }
+    .tab{
+      border:none;
+      border-radius:999px;
+      padding:11px 18px;
+      background:#e5edf9;
+      color:#274060;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      transition:all .2s ease;
+    }
+    .tab.active{
+      background:var(--accent);
+      color:#fff;
+      box-shadow:0 10px 24px rgba(20, 87, 212, 0.24);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(310px, 1fr));
+      gap:22px;
+      margin-top:24px;
+    }
+    .section{
+      margin-top:26px;
+    }
+    .section-title{
+      margin:0;
+      font-size:28px;
+      line-height:1.2;
+    }
+    .section-copy{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.8;
+    }
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      min-height:340px;
+    }
+    .card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .badge{
+      background:var(--accent-soft);
+      color:var(--accent);
+      border-radius:999px;
+      padding:7px 12px;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .state{
+      border-radius:999px;
+      padding:7px 12px;
+      font-size:12px;
+      font-weight:700;
+      background:#eef2f7;
+      color:#4b5563;
+    }
+    .state.ready{
+      background:#e7f7ee;
+      color:#166534;
+    }
+    .group-title{
+      margin:0;
+      font-size:24px;
+      line-height:1.2;
+    }
+    .group-sub{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+    }
+    .summary{
+      margin-top:16px;
+      padding:16px 18px;
+      border-radius:18px;
+      background:linear-gradient(180deg, #fbfdff 0%, #f4f8ff 100%);
+      border:1px solid #dbe7f7;
+    }
+    .summary-title{
+      margin:0 0 8px;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--accent);
+    }
+    .summary-copy{
+      margin:0;
+      color:#425066;
+      font-size:14px;
+      line-height:1.8;
+    }
+    .info-box{
+      margin-top:16px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#f8fafc;
+      padding:14px;
+      display:grid;
+      gap:8px;
+    }
+    .info-row{
+      font-size:14px;
+      color:#243244;
+      line-height:1.7;
+    }
+    .info-key{
+      font-weight:700;
+      color:var(--accent);
+      margin-right:8px;
+    }
+    .info-value{
+      color:var(--muted);
+    }
+    .work-list{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+      flex:1;
+    }
+    .work-item{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#f8fafc;
+      padding:14px;
+    }
+    .work-kind{
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--accent);
+    }
+    .work-name{
+      margin-top:8px;
+      font-size:14px;
+      line-height:1.7;
+      color:#243244;
+      word-break:break-word;
+    }
+    .empty{
+      margin-top:8px;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--muted);
+    }
+    .actions{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    .actions a,
+    .actions button{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      background:#fff;
+      color:var(--text);
+      text-align:center;
+      font-size:14px;
+      transition:all .2s ease;
+      cursor:pointer;
+    }
+    .actions a{
+      text-decoration:none;
+    }
+    .actions a:hover,
+    .actions button:hover{
+      border-color:var(--accent);
+      color:var(--accent);
+      transform:translateY(-1px);
+    }
+    .actions a.disabled,
+    .actions button.disabled{
+      pointer-events:none;
+      opacity:.45;
+    }
+    .footer{
+      margin-top:22px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.8;
+    }
+    .code{
+      font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background:#0f172a;
+      color:#e2e8f0;
+      padding:2px 6px;
+      border-radius:7px;
+      font-size:12px;
+    }
+    [hidden]{display:none !important}
+    @media (max-width:720px){
+      .wrap{padding:18px 14px 40px}
+      .hero{padding:22px}
+      .actions{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>CHI1293 中国与世界文明的未来前景（人工智能导向）(1002)（Dr. Maya Siqing LI）[2025–2026 学年 第二学期]</h1>
+      <p class="teacher">任课教师：<strong>Maya Siqing LI</strong> · <a href="https://www.bnbu.edu.cn/faculty.htm#/mayasqli/cn" target="_blank" rel="noreferrer">个人主页</a></p>
+      <p class="intro">
+        本门户包含 10 个小组展位。已将源文件夹中可用的作品导入到对应小组的展位中。
+        每个小组分别提供 <strong>文化</strong> 与 <strong>技术</strong> 两部分作品的入口。
+      </p>
+      <div class="tabs" role="tablist" aria-label="Work Sections">
+        <button class="tab active" type="button" data-target="group-panel">小组作业</button>
+        <button class="tab" type="button" data-target="individual-panel">个人作业</button>
+      </div>
+      <p class="status" id="status">Loading group files...</p>
+    </section>
+
+    <section class="section" id="group-panel">
+      <h2 class="section-title">小组作业</h2>
+      <p class="section-copy">10 个小组展位固定不变；已有作品会被填入，空缺的小组保留其位置。</p>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section class="section" id="individual-panel" hidden>
+      <h2 class="section-title">个人作业</h2>
+      <p class="section-copy">每位同学拥有独立展位；当个人作品上传后，卡片将支持在线查看与下载。</p>
+      <div class="grid" id="individual-grid"></div>
+    </section>
+
+    <p class="footer">
+      项目结构：<span class="code">index.html</span> + <span class="code">works/group1</span> ... <span class="code">works/group10</span>.
+      空缺的小组暂以占位形式保留，后续可继续放入文件而无需改动页面。
+    </p>
+  </div>
+
+  <script>
+    const GROUPS = [
+      {
+        number: 1,
+        title: "Civilization as a Shared Future in the Age of AI",
+        theme: "Yin-Yang Wisdom",
+        aiTool: "OpenClaw, Telegram, DeepSeek API, and RAG",
+        summary: "This group combines two AI-oriented directions: a medical agent built with OpenClaw, Telegram, DeepSeek API, and RAG, and a cultural study of Tianxia Weigong, 'The World as a Common Good.' The first project shows how AI agents can integrate local tools, external knowledge, and real-time information to deliver practical medical and health support, while the second explores public responsibility, inclusiveness, and global cooperation through Confucian thought and cross-civilizational comparison. Together, they argue that technology should be not only useful, but also ethical and socially beneficial.",
+        culture: "works/group1/(AI ORIENTED) Group1_culture.pptx",
+        tech: "works/group1/(AI ORIENTED) Group1_tech.pptx"
+      },
+      {
+        number: 2,
+        title: "The Core Spirits of Chinese Civilization: Interpreting Tianxia Weigong",
+        theme: "The world as a common good, fairness, inclusiveness, and public responsibility",
+        aiTool: "Not explicitly named in the PPT",
+        summary: "This presentation explains the spirit of Tianxia Weigong through Confucian thought and The Book of Rites, showing how people-centered governance links fairness, inclusiveness, and public duty. It compares this idea with traditions such as Ubuntu, traces its development from classical philosophy to Sun Yat-sen's democratic vision, and connects it to people's democracy, common prosperity, and global governance today. The project argues that this civilizational ideal still offers Eastern wisdom for building a shared future for humanity.",
+        culture: "works/group2/(AI ORIENTED) Group2_culture.pptx",
+        tech: "works/group2/(AI ORIENTED) Group2_tech.pptx"
+      },
+      {
+        number: 3,
+        title: "People as the Foundation: Bringing Ancient Chinese Political Wisdom into the Age of AI",
+        theme: "People-centered governance from oracle bones to algorithms",
+        aiTool: "HeyGen",
+        summary: "This project asks whether the 3,000-year-old principle of 'people as the foundation of the state' can still reshape governance today. It traces the idea from the Zhou Mandate of Heaven and Mencius to Taoist non-interference and the imperial examination system, then compares it with Greek citizen-power and Indian priestly models. Using HeyGen, the team stages a dialogue among Confucius, Tang Taizong, and Marcus Aurelius, and connects ancient political wisdom to poverty alleviation, whole-process democracy, the Fengqiao model, and SDGs 1, 2, 13, and 16.",
+        culture: "works/group3/(AI ORIENTED) Group3_culture.pptx",
+        tech: "works/group3/(AI ORIENTED) Group3_tech.pptx"
+      },
+      {
+        number: 4,
+        title: "Technological Civilization and Jingshi Zhiyong",
+        theme: "Practical statecraft in the technological era",
+        aiTool: "n8n workflow",
+        summary: "This work connects Jingshi Zhiyong with technological civilization by arguing that technology should serve governance, public welfare, and social development rather than innovation alone. Through historical examples, cross-civilizational comparison, contemporary cases, and SDG 9, the team shows that traditional practical statecraft still carries real value today. Their conclusion is that digital tools become most meaningful when technological progress is transformed into responsible, concrete solutions for real-world problems.",
+        culture: "works/group4/(AI ORIENTED) Group4_culture.pptx",
+        tech: "works/group4/(AI ORIENTED) Group4_tech.pptx"
+      },
+      {
+        number: 5,
+        title: "Unity of Man and Nature: Bringing Laozi Back in the Age of AI",
+        theme: "Tian Ren He Yi, ecological ethics, and digital balance",
+        aiTool: "Codex and RAG",
+        summary: "This presentation brings Tian Ren He Yi into the AI era by linking Confucian benevolence, Taoist return to the source, and Buddhist equality of beings with current environmental and psychological crises. It compares Chinese thought with Western dualism and Indian ahimsa, while grounding the discussion in cases such as the 24 Solar Terms, Qin environmental law, and China's Dual Carbon Goals. The team also builds a RAG-based Laozi agent that responds to modern stress, materialism, and eco-anxiety in a calm Daoist voice, asking how technology can return to nature rather than overpower it.",
+        culture: "works/group5/(AI ORIENTED) Group5_culture.pptx",
+        tech: "works/group5/(AI ORIENTED) Group5_tech.pptx"
+      },
+      {
+        number: 6,
+        title: "RÉN: The Heart of Chinese Civilization",
+        theme: "Benevolence as a relational ethic from self to all living things",
+        aiTool: "Dify chatbot",
+        summary: "This group explores Rén as the Confucian virtue of benevolence, following its philosophical roots, East Asian transmission, and cross-cultural parallels with Christian agape and Buddhist karuna. It moves from everyday examples, such as caring for stray cats, to questions of global governance, showing how Rén radiates outward from the self to wider communities and all living beings. The project argues that Rén remains a practical moral foundation for contemporary life, and extends that idea through a Dify chatbot that lets users learn the concept interactively.",
+        culture: "works/group6/(AI ORIENTED) Group6_culture.pptx",
+        tech: "works/group6/(AI ORIENTED) Group6_tech.pptx"
+      },
+      {
+        number: 7,
+        title: "The Middle Way: Traditional Chinese Humanistic Thought",
+        theme: "Moderation (Zhongyong) as adaptive wisdom with modern global value",
+        aiTool: "LivePortrait",
+        summary: "This project presents Zhongyong not as a rigid midpoint, but as adaptive and practical wisdom that still matters in a crisis-filled world. It traces the idea from early classics to later thought, contrasts it with Western zero-sum habits through the examples of Zheng He and Xuanzang, and proposes the '45-Degree Life' as a response to burnout, involution, and lying flat. By aligning the Middle Way with the 17 UN SDGs and staging a LivePortrait dialogue between Aristotle and Confucius, the team argues that moderation remains a viable Chinese solution to economic, ecological, and governance challenges.",
+        culture: "works/group7/(AI ORIENTED) Group7_culture.pptx",
+        tech: "works/group7/(AI ORIENTED) Group7_tech.pptx"
+      },
+      {
+        number: 8,
+        title: "The Symphony of Civilizations: From Ceaseless Vitality and Harmony in Diversity to Western Process Philosophy",
+        theme: "Ceaseless vitality, harmony in diversity, and process thinking",
+        aiTool: "AI video generation workflow (specific tool not named in the PPT)",
+        summary: "Centered on traditional Chinese philosophy, this presentation examines the twin spirits of ceaseless vitality and harmony in diversity through The I Ching, Confucianism, and Taoism. It applies these ideas to politics, ethics, and aesthetics, then places them in dialogue with Alfred North Whitehead's process philosophy. By highlighting the shared emphasis on process before substance and the primacy of relationships, the project reveals a deeper resonance between Chinese civilizational thought and modern Western philosophy.",
+        culture: "works/group8/(AI ORIENTED) Group8_culture.pdf",
+        tech: "works/group8/(AI ORIENTED) Group8_tech.pptx"
+      },
+      {
+        number: 9,
+        title: "Jingshi Zhiyong: Practical Wisdom in Chinese Civilization and Gary-Agent-RAG",
+        theme: "Knowledge applied for the common good",
+        aiTool: "Gary-Agent-RAG",
+        summary: "This project asks whether ancient Chinese philosophy already anticipated how technology should serve humanity through the idea of Jingshi Zhiyong. To make that tradition usable today, the group built a Gary-Agent-RAG system that transforms five classical Chinese texts into an interactive, source-grounded learning tool. Their work argues that the true value of technology lies not only in capability, but also in responsibility, and that ancient knowledge and modern AI can converge around a shared public purpose.",
+        culture: "works/group9/(AI ORIENTED) Group9_culture.pptx",
+        tech: "works/group9/(AI ORIENTED) Group9_tech.pptx"
+      },
+      {
+        number: 10,
+        title: "Li & Yue: Guiding Modern Science and Technology Civilization",
+        theme: "Ritual order, inner harmony, and ethical technological life",
+        aiTool: "Coze",
+        summary: "This group explores whether the ancient ethos of Li and Yue can still guide order and harmony in a rapidly developing technological world. It explains Li as the framework of social norms and Yue as the pursuit of inner and collective harmony, then compares Confucius' humanistic wisdom with Einstein's scientific rationality to show how Chinese values complement Western technological civilization. Using Coze to create thematic videos, the project links Li and Yue to AI ethics, green technology, digital etiquette, and modern governance, presenting tradition and innovation as mutually illuminating.",
+        culture: "works/group10/(AI ORIENTED) Group10_culture.pptx",
+        tech: "works/group10/(AI ORIENTED) Group10_tech.pptx"
+      }
+    ];
+
+    const STUDENTS = [
+      { index: 1, chinese: "徐伯闻", english: "Smell", group: "Group 1" },
+      { index: 2, chinese: "李炜桐", english: "ASA", group: "Group 1" },
+      { index: 3, chinese: "黄圳銓", english: "", group: "Group 1" },
+      { index: 4, chinese: "王嫣然", english: "Rianna", group: "Group 1" },
+      { index: 5, chinese: "易欣悦", english: "Jade", group: "Group 1" },
+      { index: 6, chinese: "王俊博", english: "Stephen", group: "Group 2" },
+      { index: 7, chinese: "邓浩明", english: "Deng Haoming", group: "Group 2" },
+      { index: 8, chinese: "夏晨骞", english: "Zane", group: "Group 2" },
+      { index: 9, chinese: "黄麒润", english: "Karen", group: "Group 2" },
+      { index: 10, chinese: "胡峻铭", english: "Jimmy Hu", group: "Group 2" },
+      { index: 11, chinese: "林可", english: "", group: "Group 3" },
+      { index: 12, chinese: "刘畅", english: "Grace", group: "Group 3" },
+      { index: 13, chinese: "崔了凡", english: "Chloe", group: "Group 3" },
+      { index: 14, chinese: "王若祎", english: "Abby", group: "Group 3" },
+      { index: 15, chinese: "肖阳", english: "", group: "Group 4" },
+      { index: 16, chinese: "张一诺", english: "Helen", group: "Group 4" },
+      { index: 17, chinese: "李政谕", english: "Bella", group: "Group 4" },
+      { index: 18, chinese: "叶子箐", english: "", group: "Group 4" },
+      { index: 19, chinese: "刘雨萌", english: "Icey", group: "Group 4" },
+      { index: 20, chinese: "张栩豪", english: "Kevin", group: "Group 5" },
+      { index: 21, chinese: "王彦奇", english: "Felix", group: "Group 5" },
+      { index: 22, chinese: "林禹同", english: "Gosling", group: "Group 5" },
+      { index: 23, chinese: "谢尚哲", english: "Steve", group: "Group 5" },
+      { index: 24, chinese: "熊大略", english: "David Xiong", group: "Group 5" },
+      { index: 25, chinese: "廖政恺", english: "William", group: "Group 6" },
+      { index: 26, chinese: "王子敬", english: "Michael", group: "Group 6" },
+      { index: 27, chinese: "徐子夏", english: "", group: "Group 6" },
+      { index: 28, chinese: "贾轶涵", english: "Timoris", group: "Group 6" },
+      { index: 29, chinese: "王诗怡", english: "", group: "Group 7" },
+      { index: 30, chinese: "邓杰潆", english: "Astoria", group: "Group 7" },
+      { index: 31, chinese: "陆思辰", english: "Stella", group: "Group 7" },
+      { index: 32, chinese: "毕德宁", english: "Selena", group: "Group 7" },
+      { index: 33, chinese: "刘咏昭", english: "", group: "Group 8" },
+      { index: 34, chinese: "阳晟璐", english: "", group: "Group 8" },
+      { index: 35, chinese: "门心仪", english: "Isla", group: "Group 8" },
+      { index: 36, chinese: "季玥彤", english: "", group: "Group 8" },
+      { index: 37, chinese: "刘博文", english: "Eric", group: "Group 9" },
+      { index: 38, chinese: "王科凯", english: "Jason", group: "Group 9" },
+      { index: 39, chinese: "关宇真", english: "Alex Guan", group: "Group 9" },
+      { index: 40, chinese: "乔嘉禾", english: "Harry", group: "Group 9" },
+      { index: 41, chinese: "朱浩洋", english: "Geoffrey", group: "Group 10" },
+      { index: 42, chinese: "胡雅琳", english: "", group: "Group 10" },
+      { index: 43, chinese: "杨佳琳", english: "Cassie", group: "Group 10" },
+      { index: 44, chinese: "薛羽桐", english: "Sicily", group: "Group 10" }
+    ].map((student) => {
+      const code = String(student.index).padStart(2, "0");
+      return {
+        ...student,
+        label: code,
+        title: student.chinese,
+        subtitle: student.english || "English name not provided",
+        file: `individual/${code}-${student.chinese}.pptx`
+      };
+    });
+
+    const grid = document.getElementById("grid");
+    const individualGrid = document.getElementById("individual-grid");
+    const statusEl = document.getElementById("status");
+
+    function setStatus(text) {
+      statusEl.textContent = text;
+    }
+
+    function initTabs() {
+      const tabs = document.querySelectorAll(".tab");
+      const panels = [
+        document.getElementById("group-panel"),
+        document.getElementById("individual-panel")
+      ];
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = tab.dataset.target;
+          tabs.forEach((button) => {
+            button.classList.toggle("active", button === tab);
+          });
+          panels.forEach((panel) => {
+            panel.hidden = panel.id !== target;
+          });
+        });
+      });
+    }
+
+    function formatName(path) {
+      return path.split("/").pop();
+    }
+
+    function buildDownloadHref(path) {
+      return encodeURI(path);
+    }
+
+    function getFileExtension(path) {
+      return path.split(".").pop().toLowerCase();
+    }
+
+    function buildViewHref(path) {
+      const fileUrl = new URL(buildDownloadHref(path), window.location.href).href;
+      const extension = getFileExtension(path);
+
+      if (extension === "pdf") {
+        return fileUrl;
+      }
+
+      if (extension === "pptx") {
+        return `https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(fileUrl)}`;
+      }
+
+      return fileUrl;
+    }
+
+    function makeActionMarkup(path) {
+      if (!path) {
+        return `
+          <div class="actions">
+            <a class="disabled" href="#">查看</a>
+            <a class="disabled" href="#">下载</a>
+          </div>
+        `;
+      }
+
+      const fileName = formatName(path);
+      const href = buildDownloadHref(path);
+      const viewHref = buildViewHref(path);
+
+      return `
+        <div class="actions">
+          <a href="${viewHref}" target="_blank" rel="noreferrer">查看</a>
+          <a href="${href}" download="${fileName}" target="_blank" rel="noreferrer">下载</a>
+        </div>
+      `;
+    }
+
+    function makeWorkItem(kind, path) {
+      if (!path) {
+        return `
+          <div class="work-item">
+            <div class="work-kind">${kind}</div>
+            <div class="empty">尚未上传。</div>
+            ${makeActionMarkup("")}
+          </div>
+        `;
+      }
+
+      return `
+        <div class="work-item">
+          <div class="work-kind">${kind}</div>
+          <div class="work-name">${formatName(path)}</div>
+          ${makeActionMarkup(path)}
+        </div>
+      `;
+    }
+
+    function makeIndividualCard(student) {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-head">
+          <span class="badge">学生 ${student.label}</span>
+          <span class="state">第 ${student.group.replace(/\D/g,"")} 组</span>
+        </div>
+        <h2 class="group-title">${student.title}</h2>
+        <p class="group-sub">${student.subtitle}</p>
+        <div class="info-box">
+          <div class="info-row"><span class="info-key">AI 工具：</span><span class="info-value">________________</span></div>
+          <div class="info-row"><span class="info-key">主题：</span><span class="info-value">________________</span></div>
+        </div>
+        <div class="summary">
+          <div class="summary-title">项目概述</div>
+          <p class="summary-copy">个人项目简介可稍后补充。</p>
+        </div>
+        <div class="work-list">
+          <div class="work-item">
+            <div class="work-kind">个人作业</div>
+            <div class="work-name">${student.file}</div>
+            <div class="actions">
+              <a class="disabled" href="#">查看</a>
+              <a class="disabled" href="#">下载</a>
+            </div>
+          </div>
+        </div>
+      `;
+      return card;
+    }
+
+    function makeCard(group) {
+      const readyCount = [group.culture, group.tech].filter(Boolean).length;
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-head">
+          <span class="badge">第 ${group.number} 组</span>
+          <span class="state ${readyCount ? "ready" : ""}">${readyCount ? `${readyCount}/2 就绪` : "待上传"}</span>
+        </div>
+        <h2 class="group-title">第 ${group.number} 组</h2>
+        <p class="group-sub">${group.title}</p>
+        <div class="summary">
+          <div class="summary-title">项目概述</div>
+          <p class="summary-copy">${group.summary}</p>
+        </div>
+        <div class="info-box">
+          <div class="info-row"><span class="info-key">AI 工具：</span><span class="info-value">${group.aiTool}</span></div>
+          <div class="info-row"><span class="info-key">主题：</span><span class="info-value">${group.theme}</span></div>
+        </div>
+        <div class="work-list">
+          ${makeWorkItem("文化", group.culture)}
+          ${makeWorkItem("技术", group.tech)}
+        </div>
+      `;
+      return { card, readyCount };
+    }
+
+    function initDownloadLinks() {
+      document.addEventListener("click", (event) => {
+        const link = event.target.closest("a[download]");
+        if (!link) {
+          return;
+        }
+
+        const fileName = link.getAttribute("download") || "file";
+        setStatus(`开始下载：${fileName}`);
+
+        if (window.location.protocol === "file:") {
+          const message =
+            `Local preview may not force-download this file.\n` +
+            `Please test this page through GitHub Pages or a local web server.\n` +
+            `File: ${fileName}`;
+          setStatus(message);
+        }
+      });
+    }
+
+    function init() {
+      initTabs();
+      initDownloadLinks();
+
+      let readyGroups = 0;
+      let readyFiles = 0;
+
+      GROUPS.forEach((group) => {
+        const { card, readyCount } = makeCard(group);
+        grid.appendChild(card);
+        if (readyCount > 0) {
+          readyGroups += 1;
+          readyFiles += readyCount;
+        }
+      });
+
+      STUDENTS.forEach((student) => {
+        individualGrid.appendChild(makeIndividualCard(student));
+      });
+
+      setStatus(`已加载 ${readyFiles} 个文件，覆盖 ${readyGroups} 个小组。小组展位共 10 个，个人展位共 ${STUDENTS.length} 个。`);
+    }
+
+    init();
+  </script>
+</body>
+</html>
