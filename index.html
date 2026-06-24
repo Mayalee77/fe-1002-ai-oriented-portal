@@ -304,10 +304,6 @@
         This portal contains 10 group slots. The content from the available source folders has been imported into this package for the first 8 groups where files were found.
         Each group shows separate entry points for the <strong>culture</strong> and <strong>tech</strong> works.
       </p>
-      <div class="tabs" role="tablist" aria-label="Work Sections">
-        <button class="tab active" type="button" data-target="group-panel">Group Work</button>
-        <button class="tab" type="button" data-target="individual-panel">Individual Work</button>
-      </div>
       <p class="status" id="status">Loading group files...</p>
     </section>
 
@@ -315,12 +311,6 @@
       <h2 class="section-title">Group Work</h2>
       <p class="section-copy">The 10 group slots stay fixed. Existing group files are inserted, and empty groups keep their positions.</p>
       <div class="grid" id="grid"></div>
-    </section>
-
-    <section class="section" id="individual-panel" hidden>
-      <h2 class="section-title">Individual Work</h2>
-      <p class="section-copy">Each student keeps an individual slot. When an individual file is added later, the card will support both online viewing and downloading.</p>
-      <div class="grid" id="individual-grid"></div>
     </section>
 
     <p class="footer">
@@ -480,7 +470,6 @@
     });
 
     const grid = document.getElementById("grid");
-    const individualGrid = document.getElementById("individual-grid");
     const statusEl = document.getElementById("status");
 
     function setStatus(text) {
@@ -490,8 +479,7 @@
     function initTabs() {
       const tabs = document.querySelectorAll(".tab");
       const panels = [
-        document.getElementById("group-panel"),
-        document.getElementById("individual-panel")
+        document.getElementById("group-panel")
       ];
 
       tabs.forEach((tab) => {
@@ -671,11 +659,7 @@
         }
       });
 
-      STUDENTS.forEach((student) => {
-        individualGrid.appendChild(makeIndividualCard(student));
-      });
-
-      setStatus(`Loaded ${readyFiles} files across ${readyGroups} groups. Total group slots: 10. Individual slots: ${STUDENTS.length}.`);
+      setStatus(`Loaded ${readyFiles} files across ${readyGroups} groups. Total group slots: 10.`);
     }
 
     init();
